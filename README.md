@@ -68,6 +68,30 @@ To mitigate this, we ensure transparent methodology and rigorous validation of t
 In regulated domains, a **simple interpretable model** is often preferred for compliance. Complex models may be adopted when performance gains justify the additional scrutiny and explainability techniques.
 
 ---
+## Exploratory Data Analysis (EDA)
+
+### Key EDA Insights
+
+Based on the exploratory data analysis of the Xente transactions dataset:
+
+1. **No Missing Data – But Redundant Fields**  
+   All columns are fully populated. However, `CurrencyCode` and `CountryCode` have only one unique value each and offer no predictive value. These should be dropped in modeling.
+
+2. **Extreme Class Imbalance in `FraudResult`**  
+   Only 0.2% of the data is labeled as fraudulent. Any direct modeling of this column will require resampling or class-weighted techniques to avoid bias toward the majority class.
+
+3. **Highly Skewed Transaction Amounts**  
+   The `Amount` feature spans a wide range and is highly skewed with extreme outliers. A log transformation or robust scaling is needed before feeding this into machine learning models.
+
+4. **`Value` is a Redundant Feature**  
+   The `Value` column is the absolute value of `Amount` and has near-perfect correlation with it. One of these features should be dropped to avoid multicollinearity.
+
+5. **Few Entities Dominate the Data**  
+   A small subset of accounts and product providers contribute disproportionately to transaction volume. This highlights the need for aggregation and normalization in feature engineering to prevent bias from power users.
+
+These findings inform our feature engineering, modeling strategy, and choice of evaluation metrics.
+
+---
 
 ## References
 - [Basel II Accord Summary](https://fastercapital.com/content/Basel-Accords--What-They-Are-and-How-They-Affect-Credit-Risk-Management.html)
