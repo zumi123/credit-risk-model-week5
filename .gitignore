@@ -1,0 +1,10 @@
+# OS / editors
+__pycache__/
+*.py[cod]
+.env
+# Data
+data/
+# Notebooks
+*.ipynb_checkpoints/
+# Python venvs
+.venv/
