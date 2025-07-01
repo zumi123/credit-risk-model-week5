@@ -93,6 +93,34 @@ These findings inform our feature engineering, modeling strategy, and choice of 
 
 ---
 
+## Feature Engineering
+
+I built a modular and reproducible preprocessing pipeline using `scikit-learn` to convert raw transaction data into model-ready features. The core components of the pipeline include:
+
+1. **Date/Time Feature Extraction** 
+   Extracts hour, day, month, and year from the `TransactionStartTime` field using a custom transformer.
+
+2. **Numeric Standardization** 
+   Standard scales the `Amount` and `Value` columns to normalize their distributions.
+
+3. **Categorical Encoding** 
+   Uses `OneHotEncoder` to transform high-cardinality fields like `ProviderId` and `ProductId` into binary indicator variables. We ensured compatibility with scikit-learn ≥1.2 using the `sparse_output=False` parameter.
+
+4. **Custom Transformer Support** 
+   Custom transformers (e.g., `DateTimeFeatures`) were updated to support `.set_output()` to ensure the pipeline can return a DataFrame using `set_output(transform="pandas")`.
+
+5. **Output** 
+   The pipeline was successfully applied to a demo dataset of 10,000 rows and returned a transformed matrix with **50 engineered features**. Sample feature names include:
+
+   ```
+   ['datetime__tx_hour', 'datetime__tx_day', 'datetime__tx_month', 'datetime__tx_year',
+    'numeric__Amount', 'numeric__Value',
+    'categorical__ProviderId_ProviderId_1', 'categorical__ProductId_ProductId_10', ...]
+   ```
+
+This pipeline is implemented in `src/data_processing.py` and will be used in subsequent tasks for model training and prediction.
+---
+
 ## References
 - [Basel II Accord Summary](https://fastercapital.com/content/Basel-Accords--What-They-Are-and-How-They-Affect-Credit-Risk-Management.html)
 - [Credit Risk Concepts – Investopedia](https://www.investopedia.com/terms/c/creditrisk.asp)
