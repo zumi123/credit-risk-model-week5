@@ -121,6 +121,39 @@ I built a modular and reproducible preprocessing pipeline using `scikit-learn` t
 This pipeline is implemented in `src/data_processing.py` and will be used in subsequent tasks for model training and prediction.
 ---
 
+
+
+## Proxy Target Variable Engineering
+
+Because the raw dataset contains **no explicit `default` label**, we created a proxy called `is_high_risk` using Recency–Frequency–Monetary (RFM) analysis:
+
+1. **RFM Computation**  
+   * *Recency* = days since a customer’s last transaction (relative to a fixed snapshot date).  
+   * *Frequency* = total number of transactions per customer.  
+   * *Monetary* = total absolute value of all transactions per customer.
+
+2. **Clustering**  
+   * Scaled the RFM features with `StandardScaler`.  
+   * Applied **K‑Means** with *n_clusters = 3* and `random_state=42` to obtain three behavioral segments.
+
+3. **High‑Risk Segment Identification**  
+   * Calculated cluster centroids and automatically chose the segment with **highest Recency** and **lowest Frequency/Monetary** as the *least engaged* group.  
+   * Assigned **`is_high_risk = 1`** to customers in this cluster; all others receive **0**.
+
+4. **Dataset Integration**  
+   * Merged the new binary label back into the main DataFrame, making it available for downstream model training (`train.py`).  
+   * Saved an intermediate CSV (`data/processed/rfm_labels.csv`) for transparency and QA.
+
+This logic is fully encapsulated in `src/proxy_target.py`, exposing two helpers:
+
+```python
+from src.proxy_target import compute_rfm, add_is_high_risk
+```
+
+which can be imported anywhere in the pipeline or in unit tests.
+
+---
+
 ## References
 - [Basel II Accord Summary](https://fastercapital.com/content/Basel-Accords--What-They-Are-and-How-They-Affect-Credit-Risk-Management.html)
 - [Credit Risk Concepts – Investopedia](https://www.investopedia.com/terms/c/creditrisk.asp)
