@@ -8,3 +8,4 @@ pytest
 flake8
 fastapi
 uvicorn[standard]
+mlflow\npytest

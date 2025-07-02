@@ -1,0 +1,22 @@
+artifact_path: /home/zumi/Documents/Kifiya training/Week 5/credit-risk-model-week5/mlruns/714963247962138238/models/m-9d68dc30413e4bb195f20ef54b34bd66/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.7
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.0
+mlflow_version: 3.1.1
+model_id: m-9d68dc30413e4bb195f20ef54b34bd66
+model_size_bytes: 424013
+model_uuid: m-9d68dc30413e4bb195f20ef54b34bd66
+prompts: null
+run_id: 352038f9ce0e4ea29368f96c014a314b
+utc_time_created: '2025-07-02 20:10:21.468788'

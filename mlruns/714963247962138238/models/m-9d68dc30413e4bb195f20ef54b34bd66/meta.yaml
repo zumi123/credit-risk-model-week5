@@ -1,0 +1,10 @@
+artifact_location: /home/zumi/Documents/Kifiya training/Week 5/credit-risk-model-week5/mlruns/714963247962138238/models/m-9d68dc30413e4bb195f20ef54b34bd66/artifacts
+creation_timestamp: 1751487021455
+experiment_id: '714963247962138238'
+last_updated_timestamp: 1751487029716
+model_id: m-9d68dc30413e4bb195f20ef54b34bd66
+model_type: null
+name: model
+source_run_id: 352038f9ce0e4ea29368f96c014a314b
+status: 2
+status_message: null

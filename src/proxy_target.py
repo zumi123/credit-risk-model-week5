@@ -6,18 +6,18 @@ when no true default label exists.
 
 Workflow
 --------
-1. **Compute RFM** per ``CustomerId``.
-   * *Recency*  = days since the customer’s last transaction relative to a
+1. Compute RFM per ``CustomerId``.
+    Recency  = days since the customer’s last transaction relative to a
      snapshot date.
-   * *Frequency* = count of transactions.
-   * *Monetary*  = total absolute amount spent.
-2. **Scale RFM** with ``StandardScaler`` so that each dimension contributes
+    Frequency = count of transactions.
+    Monetary  = total absolute amount spent.
+2. Scale RFM with ``StandardScaler`` so that each dimension contributes
 equally to K‑Means distance computations.
-3. **Cluster** customers into *three* segments using ``KMeans`` with
+3. Cluster customers into *three* segments using ``KMeans`` with
    ``random_state=42`` for reproducibility.
-4. **Label high‑risk cluster**  = the cluster with the *highest* mean Recency
-   **and** the *lowest* mean Frequency × Monetary product (least engaged).
-5. **Merge** the resulting ``is_high_risk`` flag back into the original
+4. Label high‑risk cluster  = the cluster with the *highest* mean Recency
+   and the lowest mean Frequency × Monetary product (least engaged).
+5. Merge the resulting ``is_high_risk`` flag back into the original
    transaction‑level DataFrame so it is ready for modelling.
 
 The main entry point is :pyfunc:`add_is_high_risk`, which wraps all steps.

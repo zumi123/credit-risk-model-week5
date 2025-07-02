@@ -1,0 +1,14 @@
+artifact_uri: /home/zumi/Documents/Kifiya training/Week 5/credit-risk-model-week5/mlruns/714963247962138238/352038f9ce0e4ea29368f96c014a314b/artifacts
+end_time: 1751487029794
+entry_point_name: ''
+experiment_id: '714963247962138238'
+lifecycle_stage: active
+run_id: 352038f9ce0e4ea29368f96c014a314b
+run_name: GBM
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1751487021434
+status: 3
+tags: []
+user_id: zumi

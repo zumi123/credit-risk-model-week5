@@ -154,6 +154,65 @@ which can be imported anywhere in the pipeline or in unit tests.
 
 ---
 
+
+## Model Training, Tuning, and Tracking
+
+I developed a robust supervised learning pipeline to train models that predict the `is_high_risk` proxy label.
+
+### 1. Model Candidates
+I trained and tuned the following classifiers:
+- **Logistic Regression**
+- **Gradient Boosting Machine (GBM)**
+
+### 2. Data Pipeline
+- The dataset was preprocessed using the Task 3 feature pipeline.
+- Labels were assigned using Task 4 (`is_high_risk`).
+- Data was split 80/20 using `stratify=y` to preserve class balance.
+
+### 3. Hyperparameter Tuning
+Each model was wrapped in a `Pipeline` and tuned using `RandomizedSearchCV`.
+
+Best parameters for **GBM**:
+```
+max_depth: 3
+n_estimators: 300
+learning_rate: 0.05
+```
+
+### 4. Evaluation Metrics
+The GBM model outperformed Logistic Regression across all metrics:
+
+| Metric     | Score     |
+|------------|-----------|
+| Accuracy   | 0.9998    |
+| Precision  | 0.9976    |
+| Recall     | 0.9976    |
+| F1 Score   | 0.9976    |
+| ROC-AUC    | 1.0000    |
+
+### 5. Experiment Tracking
+- All experiments, metrics, and artifacts were logged using **MLflow**.
+- The best model was automatically **registered** in the **MLflow Model Registry**.
+
+To view results:
+```bash
+mlflow ui
+# then visit http://localhost:5000
+```
+### 6. Unit Testing
+
+I wrote unit tests for two key helper functions:
+
+- `DateTimeFeatures` transformer (from `src.data_processing`)
+- `compute_rfm` function (from `src.proxy_target`)
+
+These are located in:
+
+```bash
+tests/test_data_processing.py
+
+---
+
 ## References
 - [Basel II Accord Summary](https://fastercapital.com/content/Basel-Accords--What-They-Are-and-How-They-Affect-Credit-Risk-Management.html)
 - [Credit Risk Concepts – Investopedia](https://www.investopedia.com/terms/c/creditrisk.asp)
