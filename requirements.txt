@@ -8,4 +8,10 @@ pytest
 flake8
 fastapi
 uvicorn[standard]
-mlflow\npytest
+mlflow
+pytest
+fastapi
+uvicorn[standard]
+pydantic
+flake8         
+black          

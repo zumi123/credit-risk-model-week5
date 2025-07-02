@@ -213,6 +213,41 @@ tests/test_data_processing.py
 
 ---
 
+## Model Deployment & CI/CD
+
+### FastAPI Service
+- **Location:** `src/api/`
+- Loads best model from MLflow via `BEST_MODEL_RUN_ID`.
+- `/predict` endpoint returns `risk_probability`.
+- Swagger UI at `/docs`.
+
+Run locally:
+
+```bash
+export MLFLOW_TRACKING_URI=./mlruns
+export BEST_MODEL_RUN_ID=<best_run_id>
+uvicorn src.api.main:app --reload --port 8000
+```
+
+### Docker
+```bash
+docker compose build --build-arg RUN_ID=<best_run_id>
+docker compose up
+```
+Container exposes `http://localhost:8000/docs`.
+
+### GitHub Actions CI
+Workflow `.github/workflows/ci.yml`:
+
+| Stage | Tool  |
+|-------|-------|
+| Lint  | flake8|
+| Test  | pytest|
+
+Build fails on any lint or test error.
+
+---
+
 ## References
 - [Basel II Accord Summary](https://fastercapital.com/content/Basel-Accords--What-They-Are-and-How-They-Affect-Credit-Risk-Management.html)
 - [Credit Risk Concepts – Investopedia](https://www.investopedia.com/terms/c/creditrisk.asp)
