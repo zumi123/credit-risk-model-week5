@@ -117,8 +117,8 @@ I built a modular and reproducible preprocessing pipeline using `scikit-learn` t
     'numeric__Amount', 'numeric__Value',
     'categorical__ProviderId_ProviderId_1', 'categorical__ProductId_ProductId_10', ...]
    ```
-
 This pipeline is implemented in `src/data_processing.py` and will be used in subsequent tasks for model training and prediction.
+
 ---
 
 
